@@ -6,7 +6,7 @@
 /*   By: seungryk <seungryk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:52:42 by seungryk          #+#    #+#             */
-/*   Updated: 2024/02/25 19:18:57 by seungryk         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:35:20 by seungryk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,32 @@ void	sort_a(t_ps *ps, int p1, int p2)
 	//sort_b(ps);
 }
 
-void    find_node(t_ps *ps)
+t_stack	*find_node(t_ps *ps)
 {
 	int	cnt;
-	int	min;
+	int	r;
+	t_stack	*min;
 	t_stack	*a_top;
 	t_stack	*b_top;
 
-	cnt = ps->b_size;
-	while (cnt)
+	min = 0;
+	cnt = 0;
+	while (cnt < ps->b_size)
 	{
 		a_top = ps->a_top;
 		b_top = ps->b_top;
+		while (a_top->num > b_top->num && a_top->prev->num > b_top->num)
+		{
+			r++;
+			a_top = a_top->next;
+		}
+		else
+			r++;
+		b_top= b_top->next;
+		cnt++;
 		
-		cnt--;
 	}
+	return (min);
 }
 
 void    greedy(t_ps *ps)
