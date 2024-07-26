@@ -5,7 +5,7 @@
       "name": "C/C++ Runner: Debug Session",
       "type": "lldb",
       "request": "launch",
-      "args": [],
+      "args": "-13",
       "cwd": "/Users/seungryk/Desktop/push_swap",
       "program": "/Users/seungryk/Desktop/push_swap/build/Debug/outDebug"
     }

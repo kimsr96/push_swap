@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_function.c                                      :+:      :+:    :+:   */
+/*   ft_function_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seungryk <seungryk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:00:39 by seungryk          #+#    #+#             */
-/*   Updated: 2024/03/16 10:33:53 by seungryk         ###   ########.fr       */
+/*   Updated: 2024/03/16 09:25:02 by seungryk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#include "ft_checker_bonus.h"
 
 void	swap(t_ps *ps, t_stack *head, char c)
 {
@@ -24,15 +24,9 @@ void	swap(t_ps *ps, t_stack *head, char c)
 	temp->next = head;
 	head->prev = temp;
 	if (c == 'a')
-	{
 		ps->a_top = temp;
-		ft_putstr_fd("sa\n", 1);
-	}
 	else
-	{
 		ps->b_top = temp;
-		ft_putstr_fd("sb\n", 1);
-	}
 }
 
 void	rotate(t_ps *ps, char c, int flag)
@@ -102,7 +96,6 @@ void	pa(t_ps *ps)
 		return ;
 	ps->a_top = add_node(&(ps->a_top), 0, data);
 	ps->a_size++;
-	ft_putstr_fd("pa\n", 1);
 }
 
 void	pb(t_ps *ps)
@@ -120,5 +113,4 @@ void	pb(t_ps *ps)
 		return ;
 	ps->b_top = add_node(&(ps->b_top), 0, data);
 	ps->b_size++;
-	ft_putstr_fd("pb\n", 1);
 }

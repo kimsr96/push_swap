@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_small_stack.c                                   :+:      :+:    :+:   */
+/*   ft_small_stack_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seungryk <seungryk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:55:30 by seungryk          #+#    #+#             */
-/*   Updated: 2024/03/16 10:34:59 by seungryk         ###   ########.fr       */
+/*   Updated: 2024/03/16 10:35:46 by seungryk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#include "ft_checker_bonus.h"
 
 static void	sort_2_stack(t_ps *ps)
 {

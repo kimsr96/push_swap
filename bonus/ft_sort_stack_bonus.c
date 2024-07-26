@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sort_stack.c                                    :+:      :+:    :+:   */
+/*   ft_sort_stack_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seungryk <seungryk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:52:42 by seungryk          #+#    #+#             */
-/*   Updated: 2024/03/18 14:13:50 by seungryk         ###   ########.fr       */
+/*   Updated: 2024/03/17 08:29:19 by seungryk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#include "ft_checker_bonus.h"
 
 static void	last_sort(t_ps *ps)
 {
@@ -62,7 +62,7 @@ static void	a_to_b(t_ps *ps, int pivot, int p1, int p2)
 	a_to_b(ps, pivot, p2 + ((pivot - p2) / 3), p2 + (2 * (pivot - p2) / 3));
 }
 
-void	free_node(t_ps *ps)
+static void	free_node(t_ps *ps)
 {
 	t_stack	*curr;
 	t_stack	*temp;

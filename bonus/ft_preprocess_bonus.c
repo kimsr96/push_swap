@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_preprocess2.c                                   :+:      :+:    :+:   */
+/*   ft_preprocess_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seungryk <seungryk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:37:50 by seungryk          #+#    #+#             */
-/*   Updated: 2024/02/25 14:54:46 by seungryk         ###   ########.fr       */
+/*   Updated: 2024/03/16 10:25:47 by seungryk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h" 
+#include "ft_checker_bonus.h"
 
 void	delete_node(t_stack **head)
 {
@@ -25,15 +25,39 @@ void	delete_node(t_stack **head)
 		*head = NULL;
 		return ;
 	}
-	prev = (*head)->prev;
-	next = (*head)->next;
-	prev->next = next;
-	next->prev = prev;
-	free(*head);
-	*head = next;
+	else
+	{
+		prev = (*head)->prev;
+		next = (*head)->next;
+		prev->next = next;
+		next->prev = prev;
+		free(*head);
+		*head = NULL;
+		*head = next;
+	}
 }
 
-void	add_index(t_ps *ps)
+void	add_index_l(t_ps *ps, int num)
+{
+	int		idx;
+	t_stack	*head;
+	t_stack	*node;
+
+	idx = 1;
+	head = ps->a_top;
+	node = ps->a_top->prev;
+	while (1)
+	{
+		if (num > head->num)
+			idx++;
+		head = head->next;
+		if (head == ps->a_top)
+			break ;
+	}
+	head->prev->idx = idx;
+}
+
+void	add_index_r(t_ps *ps)
 {
 	int		idx;
 	t_stack	*curr;
@@ -46,13 +70,15 @@ void	add_index(t_ps *ps)
 		tail = ps->a_top->prev;
 		while (tail != curr)
 		{
-			if (curr->num > tail->num)
+			if (curr->num == tail->num)
+				error_msg();
+			else if (curr->num > tail->num)
 				idx++;
 			tail = tail->prev;
 		}
 		curr->idx += idx;
-		curr = curr->prev;
-		if (curr == ps->a_top->prev)
+		curr = curr->next;
+		if (curr == ps->a_top)
 			break ;
 	}
 }

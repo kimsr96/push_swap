@@ -5,82 +5,80 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: seungryk <seungryk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 15:05:02 by seungryk          #+#    #+#             */
-/*   Updated: 2024/02/25 14:20:01 by seungryk         ###   ########.fr       */
+/*   Created: 2024/02/14 15:37:50 by seungryk          #+#    #+#             */
+/*   Updated: 2024/03/16 09:18:42 by seungryk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#include "ft_push_swap.h" 
 
-t_stack	*new_node(int data)
+void	delete_node(t_stack **head)
 {
-	t_stack	*new;
+	t_stack	*prev;
+	t_stack	*next;
 
-	new = (t_stack *)malloc(sizeof(t_stack));
-	if (!new)
-		exit(1);
-	ft_memset(new, 0, sizeof(t_stack));
-	new->num = data;
-	new->prev = NULL;
-	new->next = NULL;
-	return (new);
-}
-
-t_stack *add_node(t_stack **head, int data)
-{
-	t_stack	*new;
-
-	new = new_node(data);
-	if (*head == NULL)
+	if (!(*head))
+		return ;
+	else if ((*head)->next == *head && (*head)->prev == *head)
 	{
-		*head = new;
-		new->next = *head;
-		new->prev = *head;
+		free(*head);
+		*head = NULL;
+		return ;
 	}
 	else
 	{
-		(*head)->prev->next = new;
-		new->prev = (*head)->prev;
-		(*head)->prev = new;
-		new->next = *head;
+		prev = (*head)->prev;
+		next = (*head)->next;
+		prev->next = next;
+		next->prev = prev;
+		free(*head);
+		*head = NULL;
+		*head = next;
 	}
-	return (new);
 }
 
-void	free_node(t_stack **head)
+void	add_index_l(t_ps *ps, int num)
 {
-	t_stack	*curr;
-	t_stack	*next;
+	int		idx;
+	t_stack	*head;
+	t_stack	*node;
 
-	if (*head == NULL)
-		return ;
-	curr = *head;
-	while (curr->next != *head)
+	idx = 1;
+	head = ps->a_top;
+	node = ps->a_top->prev;
+	while (1)
 	{
-		next = curr->next;
-		free(curr);
-		curr = next;
+		if (num > head->num)
+			idx++;
+		head = head->next;
+		if (head == ps->a_top)
+			break ;
 	}
-	free(curr);
-	*head = NULL;
+	head->prev->idx = idx;
 }
 
-void	init_stack(t_ps *ps, char **argv)
+void	add_index_r(t_ps *ps)
 {
-	int		i;
+	int		idx;
+	t_stack	*curr;
+	t_stack	*tail;
 
-	i = 0;
-	ps->a_top = NULL;
-	ps->b_top = NULL;
-	while (argv[i])
-    {
-		add_node(&(ps->a_top), ft_atoi(argv[i]));
-        i++;
-    }
-    ps->a_size = i;
-    ps->b_size = 0;
-	//if (i <= 3 && !is_sorted(ps->a_top))
-	//	sort_small_stack(ps, i, 'a');
-	//print_stack(ps->a_top, 'a');
-	//print_stack(ps->b_top, 'b');
+	curr = ps->a_top;
+	while (1)
+	{
+		idx = 0;
+		tail = ps->a_top->prev;
+		while (tail != curr)
+		{
+			if (curr->num == tail->num)
+				error_msg();
+			else if (curr->num > tail->num)
+				idx++;
+			tail = tail->prev;
+		}
+		curr->idx += idx;
+		curr = curr->next;
+		if (curr == ps->a_top)
+			break ;
+	}
 }

@@ -30,7 +30,7 @@ $(NAME) : $(OBJECTS)
 all : $(NAME) $(INC)
 
 bonus :
-	make WITH_BONUS=1 all
+	@make WITH_BONUS=1 all
 
 clean : 
 	$(RM) $(OBJS) $(OBJS_B)

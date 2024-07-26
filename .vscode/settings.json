@@ -59,7 +59,11 @@
   "files.associations": {
     "ft_push_swap.h": "c",
     "__bit_reference": "c",
-    "algorithm": "c"
+    "algorithm": "c",
+    "ratio": "c",
+    "stdlib.h": "c",
+    "random": "c",
+    "sstream": "c"
   },
   "editor.insertSpaces": true,
   "editor.comments.insertSpace": false

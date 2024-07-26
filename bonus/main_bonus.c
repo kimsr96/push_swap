@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seungryk <seungryk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 12:00:05 by seungryk          #+#    #+#             */
-/*   Updated: 2024/03/19 08:08:03 by seungryk         ###   ########.fr       */
+/*   Created: 2024/03/13 14:28:16 by seungryk          #+#    #+#             */
+/*   Updated: 2024/03/19 08:08:24 by seungryk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#include "ft_checker_bonus.h"
 
 static int	cnt_word(char **str)
 {
@@ -85,7 +85,7 @@ int	main(int argc, char **argv)
 	idx = 0;
 	s = make_str(argc, argv);
 	init_stack(&ps, s);
-	sort_stack(&ps);
+	check_cmd(&ps);
 	free_arr(s);
 	return (0);
 }

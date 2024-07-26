@@ -1,0 +1,99 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_greedy.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seungryk <seungryk@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/12 13:09:35 by seungryk          #+#    #+#             */
+/*   Updated: 2024/03/13 18:43:09 by seungryk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_push_swap.h"
+
+static int	check_min(int get_a, int get_b, int cnt_a, int cnt_b)
+{
+	if (cnt_a < 0)
+		cnt_a *= -1;
+	if (cnt_b < 0)
+		cnt_b *= -1;
+	if (get_a < 0)
+		get_a *= -1;
+	if (get_b < 0)
+		get_b *= -1;
+	if (cnt_a + cnt_b < get_a + get_b)
+		return (1);
+	else
+		return (0);
+}
+
+static int	cnt_node_a(t_ps *ps, int n)
+{
+	int		cnt_a;
+	int		size_a;
+	t_stack	*node_a;
+
+	cnt_a = 0;
+	node_a = ps->a_top;
+	size_a = ps->a_size;
+	while (size_a)
+	{
+		if (n < node_a->idx && n < node_a->prev->idx && \
+							node_a->idx < node_a->prev->idx)
+			break ;
+		if (n < node_a->idx && n > node_a->prev->idx && \
+							node_a->idx > node_a->prev->idx)
+			break ;
+		cnt_a++;
+		node_a = node_a->next;
+		size_a--;
+	}
+	if (cnt_a > ps->a_size / 2)
+		cnt_a = cnt_a - ps->a_size;
+	return (cnt_a);
+}
+
+static void	find_node(t_ps *ps, int *get_a, int *get_b)
+{
+	int		cnt_a;
+	int		cnt_b;
+	int		idx;
+	t_stack	*node_b;
+
+	idx = 0;
+	cnt_b = 0;
+	node_b = ps->b_top;
+	while (idx < ps->b_size)
+	{
+		cnt_a = cnt_node_a(ps, node_b->idx);
+		if (idx > ps->b_size / 2)
+			cnt_b = idx - ps->b_size;
+		else
+			cnt_b = idx;
+		if (idx == 0 || check_min(*get_a, *get_b, cnt_a, cnt_b))
+		{
+			*get_a = cnt_a;
+			*get_b = cnt_b;
+		}
+		node_b = node_b->next;
+		idx++;
+	}
+}
+
+void	greedy(t_ps *ps)
+{
+	int	get_a;
+	int	get_b;
+
+	while (ps->b_size)
+	{
+		get_a = 0;
+		get_b = 0;
+		find_node(ps, &get_a, &get_b);
+		rotate_both(ps, &get_a, &get_b);
+		rotate_a(ps, get_a);
+		rotate_b(ps, get_b);
+		pa(ps);
+	}		
+}

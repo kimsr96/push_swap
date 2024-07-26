@@ -1,28 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_utils_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seungryk <seungryk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 19:53:10 by seungryk          #+#    #+#             */
-/*   Updated: 2024/03/14 19:08:15 by seungryk         ###   ########.fr       */
+/*   Created: 2024/02/14 19:45:06 by seungryk          #+#    #+#             */
+/*   Updated: 2024/03/19 13:45:21 by seungryk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_checker_bonus.h"
 
-t_list	*ft_lstnew(void	*content)
+void	*free_arr(char **str)
 {
-	t_list	*new;
+	int	i;
 
-	new = (t_list *)malloc(sizeof(t_list));
-	if (!new)
+	i = 0;
+	if (!str)
 		return (NULL);
-	if (!content)
-		new->content = NULL;
-	else
-		new->content = content;
-	new->next = NULL;
-	return (new);
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+	return (NULL);
+}
+
+int	is_sorted(t_stack *head)
+{
+	int		idx;
+	t_stack	*curr;
+
+	if (!head)
+		return (0);
+	idx = head->idx;
+	curr = head->next;
+	while (curr != head)
+	{
+		if (idx > curr->idx)
+			return (0);
+		idx = curr->idx;
+		curr = curr->next;
+	}
+	return (1);
 }
